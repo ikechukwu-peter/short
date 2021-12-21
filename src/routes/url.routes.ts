@@ -1,12 +1,12 @@
 import { Router } from "express";
-import url from "../controllers/urls.controller";
+import urlController from "../controllers/urls.controller";
 
 const route = Router();
 
-route.get("/", url.index);
-route.get("/shorten/:urlToShorten", url.urlShortener);
-route.get("/expand/:shortenUrl", url.urlExpander);
-route.get("/:url", url.urlForwarder);
-route.get("*", url.urlDoNotExist);
+route.get("/", urlController.index);
+route.get("/shorten/:urlToShorten", urlController.urlShortener);
+route.get("/expand", urlController.urlExpander);
+route.get("/:urlToForward", urlController.urlForwarder);
+route.get("*", urlController.urlDoNotExist);
 
 export default route;

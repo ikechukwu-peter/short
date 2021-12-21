@@ -20,29 +20,33 @@ class URLS {
   }
   async urlExpander(req: Request, res: Response) {
     //extract user shortened link
-    const { shortenUrl } = req.params;
+    const { query } = req.query;    
     try {
-      let response = await urls.urlExpander(shortenUrl);
+      let response = await urls.urlExpander(query);
 
       res.status(201).send(response);
     } catch (err: any) {
       console.log(err);
-      res.status(500).json({ status: "fail", error: err.message });
+      if(err.code === "ENOTFOUND"){
+        res.status(404).json({status: "fail", error: "The requested URL was not found"});
+      }
+      else {
+        res.status(500).json({ status: "fail", error: "Something went wrong" });
+      }
     }
   }
   async urlForwarder(req: Request, res: Response) {
     //extract shortened link
-    // const { url } = req.params;
+    const { urlToForward} = req.params;
 
-    // try {
-    //   let response = await urls.urlForwarder(url);
-    //   res.redirect(response);
-    // } catch (err: any) {
-    //   console.log(err);
-    //   res.status(500).json({ status: "fail", error: err });
-    // }
+    try {
+      let response = await urls.urlForwarder(urlToForward);
+      res.redirect(response);
+    } catch (err: any) {
+      console.log(err);
+      res.status(500).json({ status: "fail", error: err });
+    }
 
-    res.redirect("google.com");
   }
 
   async urlDoNotExist(req: Request, res: Response) {
@@ -53,6 +57,6 @@ class URLS {
   }
 }
 
-const url = new URLS();
+const urlController = new URLS();
 
-export default url;
+export default urlController;

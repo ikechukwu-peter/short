@@ -9,7 +9,7 @@ class URLS {
   private fullPath: string = path.resolve(__dirname, this.relative_filename);
   private url: any;
 
-  constructor() {}
+  constructor() { }
   async urlShortener(urlToShorten: string) {
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
@@ -22,6 +22,8 @@ class URLS {
 
         // if (copy) {
         // }
+
+        if (!urlToShorten.startsWith('http')) urlToShorten = "https:" + "//" + urlToShorten;
 
         let urlData = await ShortenModel.create({
           shorturl: msg,
@@ -45,23 +47,28 @@ class URLS {
     });
   }
 
-  async urlExpander(shortenUrl: string) {
-    if (!shortenUrl.startsWith("http")) shortenUrl = "http" + "/" + shortenUrl;
-    request(
-      {
-        url: shortenUrl,
-        method: "HEAD",
-        followAllRedirects: true,
-      },
-      (err, response, body) => {
-        if (err) {
-          console.log(err);
-          return Promise.reject(err.message);
-        }
+  async urlExpander(shortenUrl: any) {
 
-        return Promise.resolve(response.request.href);
-      }
-    );
+    if (!shortenUrl.startsWith("http")) shortenUrl = "https:" + "//" + shortenUrl;
+
+    return new Promise((resolve, reject) => {
+      request(
+        {
+          url: shortenUrl,
+          method: "HEAD",
+          followAllRedirects: true,
+        },
+        (err, response, body) => {
+          if (err) {
+            console.log(err);
+            return reject(err);
+          }
+    
+          return resolve(response.request.href);
+        }
+      );
+    })
+   
   }
   async urlForwarder(url: string) {
     try {
