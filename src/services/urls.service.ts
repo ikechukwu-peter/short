@@ -10,7 +10,7 @@ class URLS {
   private url: any;
 
   constructor() { }
-  async urlShortener(urlToShorten: string) {
+  async urlShortener(urlToShorten: any) {
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
 
@@ -47,6 +47,25 @@ class URLS {
     });
   }
 
+  async urlShortenerCustom(urlToShorten: any, custom: any) {
+    try {
+
+      let data = await ShortenModel.findOne({ shorturl: custom })
+
+      if (data === null) {
+        let newUrl = await ShortenModel.create({ shorturl: custom, longurl: urlToShorten })
+        return Promise.resolve(newUrl.shorturl)
+      }
+      else {
+        return Promise.reject(`Custom url ${custom} not allowed.`);
+      }
+
+    } catch (err: any) {
+      return Promise.reject(`Error occured`);
+    }
+
+  }
+
   async urlExpander(shortenUrl: any) {
 
     if (!shortenUrl.startsWith("http")) shortenUrl = "https:" + "//" + shortenUrl;
@@ -63,12 +82,12 @@ class URLS {
             console.log(err);
             return reject(err);
           }
-    
+
           return resolve(response.request.href);
         }
       );
     })
-   
+
   }
   async urlForwarder(url: string) {
     try {
