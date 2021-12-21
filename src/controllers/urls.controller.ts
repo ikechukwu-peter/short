@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
+import path from 'path'
 import ShortenModel from "../model/shorten.model";
 import urls from "../services/urls.service";
+
 
 class URLS {
   constructor() { }
   async index(req: Request, res: Response) {
-    res.send("Hello");
+   res.render("index", {title: "Nip || shorten and expand your url."})
+    
   }
   async urlShortener(req: Request, res: Response) {
     //extract url to shorten and custom if any

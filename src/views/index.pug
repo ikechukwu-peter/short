@@ -1,0 +1,43 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(http-equiv="refresh", content="5")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', type='text/css', href='/css/normalize.css')
+        link(rel='stylesheet', type='text/css', href='/css/main.css')
+        title=title
+    body
+        header(class="head-container")
+            div(class="logo")
+                h3(class="brand") Nip 
+            ul(class="nav") 
+                    li(class="nav-links") 
+                        a(href="http://google.com", target="_blank", rel="noopener noreferrer") Services 
+                    li(class="nav-links") 
+                        a(href="http://facebook.com", target="_blank", rel="noopener noreferrer") About
+        main
+            div(class="intro-container")
+                h1(class="intro") Short links, big result and more...
+                p(class="intro-support") A URL shortener and expander built to scale and protect you.
+       
+            div(class="shorten-container")
+                form#shorten(action="")
+                    input(type="text" placeholder=("Shorten your link")) 
+                    button(type="submit") Shorten
+                    div(class="shorten-url")
+            div(class="outro-container")
+                h2(class="question") Did you know?
+                p(class="explainer") You can find the full form of a url before clicking? Use the expand option below.
+            div(class="expand-container")
+                form#expand(action="")
+                    input(type="text" placeholder=("Expand your link")) 
+                    button(type="submit") Expand
+                    div(class="expand_url")
+        
+
+        footer 
+            p
+             =  new Date().getFullYear()
+            
