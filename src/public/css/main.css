@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+/* General settings */
 :root {
     --theme: #fff;
     --hover: #ddd;
-    --primary: rgb(23, 60, 172);
+    --primary: #007bff;
     --secondary: #eee;
     --text: #342834;
+    --button: #ee350f;
+    --button-hover: #ff6116;
+    --copy-hover: #504250;;
 }
 * {
     margin: 0;
@@ -23,19 +27,28 @@ body {
     /* max-width: 1400px; */
     min-height: calc(100% -50vh);
     background: var(--theme);
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     color: var(--text);
 }
+li {
+    list-style: none;
+}
 
+a {
+    text-decoration: none;
+}
+
+/* Header */
 .head-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 3rem;
+    margin: 0 2rem;
     position: sticky;
     top: 0;
+    background: var(--theme);
 }
 
 .logo {  
@@ -69,6 +82,7 @@ body {
     background: var(--hover);
 }
 
+/* Intro section  */
 .intro-container {
     text-align: center;
 }
@@ -87,77 +101,187 @@ body {
     word-wrap: break-word;
     margin-bottom: 2rem;
 }
+
+/* URL shortening element */
 .shorten-container{
-    display: flex;
     background: var(--primary);
-    height: 10rem;
+    height: auto;
     padding: 2rem;
+    margin: 0 2rem;
 }
 #shorten {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-#shorten input {
-    width: 60%; 
-    height: 3rem;
-    border-radius: .5rem;
-    margin-right: 4rem;
-    text-align: center;
-    border: none;
+#user-link {
+    width: 80%;
 }
 
-#shorten button {
-    width: 20%; 
-    height: 3rem;
-    border-radius: .5rem;
-    border: none;
-    background: rgb(72, 73, 95);
-}
-
-#shorten button:hover{
-    cursor: pointer;
-}
-
+/* expand */
 .expand-container{
-    display: flex;
     background: grey;
-    height: 10rem;
+    height: auto;
     padding: 2rem;
+    margin: 0 2rem;
 }
 #expand {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #expand input {
-    width: 60%; 
+    width: 80%; 
+}
+
+#user-link, #expand input {
     height: 3rem;
     border-radius: .5rem;
     margin-right: 4rem;
     text-align: center;
     border: none;
+    font-size: 1.2rem;
 }
 
-#expand button {
-    width: 20%; 
+#expand-btn, #shorten-btn {
+    font-size: 1.3rem;
+    width: 20%;
     height: 3rem;
     border-radius: .5rem;
     border: none;
+    background: var(--button);
+    color: var(--theme);
 }
 
-#expand button:hover{
+#expand-btn:hover, #shorten-btn:hover{
+    cursor: pointer;
+    background: var(--button-hover);
+}
+
+/* Dynamic url */
+.shorten-url, .expand-url {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: #28c98b;
+    /* text-align: center;  */
+    margin: 2rem 0;
+    height: auto;
+    padding: .5rem 2rem;
+    border-radius: .5rem; 
+
+}
+
+/* Link provided by the user */
+span.user-provided {
+    width: 10%;
+}
+
+.user-provided a {
+    color: var(--text);
+}
+
+/* Link generated */
+.generated {
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Generate button  */
+.generated button {
+    color: var(--theme);
+    background: var(--text);
+    border: none;
+    outline: none;
+    padding: .5rem;
+    border-radius: .5rem;
     cursor: pointer;
 }
-
+.generated button:hover {
+    background: var(--copy-hover);
+}
+/*  Container for further action */
 .outro-container {
     margin: 3rem 0;
     text-align: center;
 }
+
+/* question, did you know? */
 .question {
     margin: 2rem 0;
     font-size: 4rem;
 }
+
+/* Explaining paragraph */
 .explainer {
     word-wrap: break-word;
     padding: 0 4rem;
     font-size: 2rem;
+}
+
+/* Service and About section */
+
+.service-about {
+    display: flex;
+    align-items: center;
+    margin: 0 2rem;
+    margin-top: 3rem;
+    justify-content: space-around;
+}
+
+.about {
+width: 50%;
+text-align: center;
+}
+.services {
+    width: 50%;
+    text-align: justify;
+}
+
+.services  h2{
+    padding: 3rem;
+    font-size: 3rem;
+}
+
+.about h2{
+    text-align: center;
+    padding: 3rem;
+    font-size: 3rem;
+}
+.services ul li  {
+font-size: 1.4rem;
+padding: .5rem;
+}
+.about p {
+    font-size: 1.4rem;
+    word-wrap: break-word;
+}
+
+/* Footer section */
+
+footer {
+    margin-top: 2rem;
+    text-align: center;
+    height: 50px;
+}
+
+/* Copyright */
+
+.copyright {
+    font-size: 1.4rem;
+}
+
+#branding {
+    width: 20%;
+    height: 3rem;
+    border-radius: .5rem;
+    margin-right: 2rem;
+    text-align: center;
+    border: none;
+    font-size: 1rem;
 }

@@ -3,7 +3,6 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(http-equiv="refresh", content="5")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel='stylesheet', type='text/css', href='/css/normalize.css')
         link(rel='stylesheet', type='text/css', href='/css/main.css')
@@ -14,9 +13,9 @@ html(lang="en")
                 h3(class="brand") Nip 
             ul(class="nav") 
                     li(class="nav-links") 
-                        a(href="http://google.com", target="_blank", rel="noopener noreferrer") Services 
+                        a(href="#services") Services 
                     li(class="nav-links") 
-                        a(href="http://facebook.com", target="_blank", rel="noopener noreferrer") About
+                        a(href="#about") About
         main
             div(class="intro-container")
                 h1(class="intro") Short links, big result and more...
@@ -24,20 +23,48 @@ html(lang="en")
        
             div(class="shorten-container")
                 form#shorten(action="")
-                    input(type="text" placeholder=("Shorten your link")) 
-                    button(type="submit") Shorten
-                    div(class="shorten-url")
+                    input#user-link(type="text" placeholder=("Shorten your link")) 
+                    input#branding(type="text" placeholder=("custom branding")) 
+                    button#shorten-btn(type="submit") Shorten
+                    div 
+                        
+                    //- h3 Provide custom name
+                    //- input#branding(type="text" placeholder=("add branding or custom name")) 
+                div(class="shorten-url") 
+                    span(class="user-provided") 
+                        a google.com
+                    div(class="generated")
+                        a(href="google.com", title="Shorten url for") http://nip.com/mnhe
+                        span(class="copy")
+                            button(class="shorten-copy-btn") Copy
             div(class="outro-container")
                 h2(class="question") Did you know?
                 p(class="explainer") You can find the full form of a url before clicking? Use the expand option below.
             div(class="expand-container")
                 form#expand(action="")
                     input(type="text" placeholder=("Expand your link")) 
-                    button(type="submit") Expand
-                    div(class="expand_url")
-        
+                    button#expand-btn(type="submit") Expand
+                div(class="expand-url")
+                    span(class="user-provided")
+                        a nip.com/jhjhdjh
+                    div(class="generated") 
+                        a(href="", title="Expanded URL") https://google.com    
+                        span(class="copy")
+                            button(class="expand-copy-btn") Copy
+            div(class="service-about")
+                div#services(class="services")
+                    h2 Service 
+                    ul
+                        li URL shortening.
+                        li URL shortening with branding.
+                        li URL expanding.
+                        li URL analytics (coming soon).
+                div#about(class="about")
+                    h2 About
+                    p Nip is a platform that provides URL shortening service for your brand or for you, we also expand shortened URL in case you might want to check the legitimacy of a short link you are provided with.   
 
-        footer 
-            p
-             =  new Date().getFullYear()
+        footer
+            p(class="copyright")  © Nip #{new Date().getFullYear()}
+    
+        script(src="/js/script.js") 
             
