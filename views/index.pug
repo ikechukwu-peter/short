@@ -29,25 +29,27 @@ html(lang="en")
                                             
                 div(class="shorten-url") 
                     span(class="user-provided") 
-                        a google.com
+                        a#user-provided-link
                     div(class="generated")
-                        a(href="google.com", title="Shorten url for") http://nip.com/mnhe
-                        span(class="copy")
+                        a#generated-link()
+                        span(class="tooltip")                        
                             button(class="shorten-copy-btn") Copy
+                                span#myTooltip(class="tooltiptext shorttip") Copy to clipboard
             div(class="outro-container")
                 h2(class="question") Did you know?
                 p(class="explainer") You can find the full form of a url before clicking? Use the expand option below.
             div(class="expand-container")
                 form#expand(action="")
-                    input(type="text" placeholder=("Expand your link")) 
+                    input#expand-input(type="text" placeholder=("Expand your link")) 
                     button#expand-btn(type="submit") Expand
                 div(class="expand-url")
                     span(class="user-provided")
-                        a nip.com/jhjhdjh
-                    div(class="generated") 
-                        a(href="", title="Expanded URL") https://google.com    
-                        span(class="copy")
+                        a#user-provided-url
+                    div(class="generated")
+                        a#expanded-link() 
+                        span(class="tooltip")
                             button(class="expand-copy-btn") Copy
+                                span#myTooltip(class="tooltiptext expandtip") Copy to clipboard
             div(class="service-about")
                 div#services(class="services")
                     h2 Services 

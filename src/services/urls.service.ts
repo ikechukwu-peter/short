@@ -7,9 +7,8 @@ import { fork } from "child_process";
 class URLS {
   private relative_filename: string = "../lib/random.ts";
   private fullPath: string = path.resolve(__dirname, this.relative_filename);
-  private url: any;
 
-  constructor() { }
+  constructor() {}
   async urlShortener(urlToShorten: any) {
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
@@ -23,14 +22,15 @@ class URLS {
         // if (copy) {
         // }
 
-        if (!urlToShorten.startsWith('http')) urlToShorten = "https:" + "//" + urlToShorten;
+        if (!urlToShorten.startsWith("http"))
+          urlToShorten = "https:" + "//" + urlToShorten;
 
         let urlData = await ShortenModel.create({
           shorturl: msg,
           longurl: urlToShorten,
         });
 
-        console.log(urlData);
+        console.log(urlData + "I came from here");
 
         if (urlData.shorturl) {
           //send response
@@ -49,31 +49,31 @@ class URLS {
 
   async urlShortenerCustom(urlToShorten: any, custom: any) {
     try {
-
-      let data = await ShortenModel.findOne({ shorturl: custom })
+      if (!urlToShorten.startsWith("http"))
+        urlToShorten = "https:" + "//" + urlToShorten;
+      let data = await ShortenModel.findOne({ shorturl: custom });
 
       if (data === null) {
-        let newUrl = await ShortenModel.create({ shorturl: custom, longurl: urlToShorten })
-        return Promise.resolve(newUrl.shorturl)
-      }
-      else {
+        let newUrl = await ShortenModel.create({
+          shorturl: custom,
+          longurl: urlToShorten,
+        });
+        return Promise.resolve(newUrl.shorturl);
+      } else {
         return Promise.reject(`Custom url ${custom} not allowed.`);
       }
-
     } catch (err: any) {
       return Promise.reject(`Error occured`);
     }
-
   }
 
-  async urlExpander(shortenUrl: any) {
-
-    if (!shortenUrl.startsWith("http")) shortenUrl = "https:" + "//" + shortenUrl;
+  async urlExpander(expandUrl: any) {
+    if (!expandUrl.startsWith("http")) expandUrl = "https:" + "//" + expandUrl;
 
     return new Promise((resolve, reject) => {
       request(
         {
-          url: shortenUrl,
+          url: expandUrl,
           method: "HEAD",
           followAllRedirects: true,
         },
@@ -86,8 +86,7 @@ class URLS {
           return resolve(response.request.href);
         }
       );
-    })
-
+    });
   }
   async urlForwarder(url: string) {
     try {
