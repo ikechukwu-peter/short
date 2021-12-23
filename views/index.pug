@@ -23,13 +23,10 @@ html(lang="en")
        
             div(class="shorten-container")
                 form#shorten(action="")
-                    input#user-link(type="text" placeholder=("Shorten your link")) 
-                    input#branding(type="text" placeholder=("custom branding")) 
+                    input#user-link(type="text" placeholder=("Shorten your link") name=("user-link")) 
+                    input#branding(type="text" placeholder=("custom branding") name=("branding")) 
                     button#shorten-btn(type="submit") Shorten
-                    div 
-                        
-                    //- h3 Provide custom name
-                    //- input#branding(type="text" placeholder=("add branding or custom name")) 
+                                            
                 div(class="shorten-url") 
                     span(class="user-provided") 
                         a google.com
@@ -53,7 +50,7 @@ html(lang="en")
                             button(class="expand-copy-btn") Copy
             div(class="service-about")
                 div#services(class="services")
-                    h2 Service 
+                    h2 Services 
                     ul
                         li URL shortening.
                         li URL shortening with branding.
@@ -66,5 +63,5 @@ html(lang="en")
         footer
             p(class="copyright")  © Nip #{new Date().getFullYear()}
     
-        script(src="/js/script.js") 
+        script(src="/js/bundle.js") 
             

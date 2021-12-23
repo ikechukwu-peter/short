@@ -16,7 +16,7 @@ class URLS {
     console.log(urlToShorten, custom)
     try {
 
-      if (!custom) {
+      if (custom === undefined) {
         let response = await urls.urlShortener(urlToShorten);
         res.status(201).send(response);
       }
