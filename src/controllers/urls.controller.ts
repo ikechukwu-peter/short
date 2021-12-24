@@ -28,7 +28,8 @@ class URLS {
           let data = await ShortenModel.findOne({ shorturl: custom });
 
           if (data !== null) {
-            res.status(403).send(`Custom url ${custom} already used.`);
+            let errMessage = `Custom url ${custom} already used.`;
+            res.status(409).json({ status: "fail", message: errMessage });
           } else {
             let customResp = await urls.urlShortenerCustom(
               urlToShorten,

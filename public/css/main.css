@@ -170,7 +170,7 @@ a {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: #28c98b;
+  background: var(--theme);
   /* text-align: center;  */
   margin: 2rem 0;
   height: auto;
@@ -190,8 +190,8 @@ span.user-provided {
 /* Link generated */
 .generated {
   display: flex;
-  width: 30%;
-  justify-content: space-evenly;
+  width: 60%;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -327,4 +327,9 @@ footer {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+/* Button loading && is active class */
+#is-active {
+  background: var(--copy-hover);
 }
