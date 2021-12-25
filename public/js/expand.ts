@@ -65,7 +65,7 @@ export const expand = async (url: string) => {
   } catch (err: any) {
     expandBtn.innerHTML = "Shorten";
     expandBtn.disabled = false;
-    console.log(err);
+    console.log(err.response.data.message);
     alert(err);
 
     // showAlert('error', err.response.data.message);

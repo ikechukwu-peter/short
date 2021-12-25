@@ -1,7 +1,7 @@
 /* eslint-disable */
 import axios from "axios";
 let shortenBtn = <HTMLInputElement>document.getElementById("shorten-btn");
-let form = document.getElementById("shorten");
+let shortForm = document.getElementById("shorten");
 
 export const shorten = async (urlToShorten: string, custom: string = "") => {
   try {
@@ -27,7 +27,7 @@ export const shorten = async (urlToShorten: string, custom: string = "") => {
     shortenBtn.innerHTML = "Shorten";
     shortenBtn.disabled = false;
     console.log(res.data);
-    if (form) {
+    if (shortForm) {
       console.log(res.data);
       let insertResponseToDom = `<div class="shorten-url">
                 <span class="user-provided">
@@ -48,7 +48,7 @@ export const shorten = async (urlToShorten: string, custom: string = "") => {
       if (shortenUrlDiv) {
         shortenUrlDiv.parentNode?.removeChild(shortenUrlDiv);
       }
-      form.insertAdjacentHTML("afterend", insertResponseToDom);
+      shortForm.insertAdjacentHTML("afterend", insertResponseToDom);
       let generated_url = document.getElementById("generated-link");
       let genCopyBtn = document.querySelector(".shorten-copy-btn");
       let tooltip = document.querySelector(".shorttip");
@@ -70,8 +70,7 @@ export const shorten = async (urlToShorten: string, custom: string = "") => {
   } catch (err: any) {
     shortenBtn.innerHTML = "Shorten";
     shortenBtn.disabled = false;
-    console.log(err.message);
-    alert(err);
+    console.log(err.response.data.message);
 
     // showAlert('error', err.response.data.message);
   }
