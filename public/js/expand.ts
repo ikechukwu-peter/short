@@ -1,10 +1,12 @@
 /* eslint-disable */
 import axios from "axios";
+import { showAlert } from './alert'
 let expForm = document.getElementById("expand");
-
 let expandBtn = <HTMLInputElement>document.getElementById("expand-btn");
 
 export const expand = async (url: string) => {
+  let hoverColor: string = "#504250";
+  let bgExpColor: string = "#342834"
   try {
     let route: string = `/expand?query=${url}`;
 
@@ -12,6 +14,7 @@ export const expand = async (url: string) => {
       let spinner = `<i class="fa fa-spinner fa-spin"></i>`;
       expandBtn.innerHTML = spinner;
       expandBtn.disabled = true;
+      expandBtn.style.backgroundColor = hoverColor;
     }
 
     const res = await axios({
@@ -20,6 +23,7 @@ export const expand = async (url: string) => {
     });
     expandBtn.innerHTML = "Expand";
     expandBtn.disabled = false;
+    expandBtn.style.backgroundColor = bgExpColor
 
     if (expForm) {
       console.log(res.data);
@@ -63,11 +67,10 @@ export const expand = async (url: string) => {
       }
     }
   } catch (err: any) {
-    expandBtn.innerHTML = "Shorten";
+    expandBtn.innerHTML = "Expand";
     expandBtn.disabled = false;
+    expandBtn.style.backgroundColor = bgExpColor
     console.log(err.response.data.message);
-    alert(err);
-
-    // showAlert('error', err.response.data.message);
+    showAlert('error', err.response ? err.response.data.message : "Please check your internet connection");
   }
 };

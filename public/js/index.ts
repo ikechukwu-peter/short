@@ -2,6 +2,8 @@
 import "@babel/polyfill";
 import { shorten } from "./shorten";
 import { expand } from "./expand";
+import { showAlert } from './alert'
+import { isURL } from './checkURL'
 
 //DOM ELEMENTS
 let shortenForm = document.getElementById("shorten");
@@ -15,21 +17,28 @@ if (shortenForm) {
     e.preventDefault();
     let url =
       elements[0].value &&
-      elements[0].value !== "" &&
-      elements[0].value !== null
+        elements[0].value !== "" &&
+        elements[0].value !== null
         ? elements[0].value
         : "";
-    let custom =
-      elements[1].value &&
-      elements[1].value !== "" &&
-      elements[1].value !== null
-        ? elements[1].value
-        : "";
 
-    if (url && url !== "") {
-      shorten(url, custom);
-    } else {
-      console.log(`Empty url not allowed `);
+    if (!isURL(url)) {
+      showAlert("error", "Invalid URL")
+    }
+    else {
+      let custom =
+        elements[1].value &&
+          elements[1].value !== "" &&
+          elements[1].value !== null
+          ? elements[1].value
+          : "";
+
+      if (url && url !== "") {
+        shorten(url, custom);
+      } else {
+        showAlert("error", "Please type your url")
+        console.log(`Empty url not allowed `);
+      }
     }
   });
 }
@@ -44,15 +53,20 @@ if (expandForm) {
 
     let url: string =
       elements[0].value &&
-      elements[0].value !== "" &&
-      elements[0].value !== null
+        elements[0].value !== "" &&
+        elements[0].value !== null
         ? elements[0].value
         : "";
 
-    if (url && url !== "") {
-      expand(url);
+    if (!isURL(url)) {
+      showAlert("error", "Invalid URL")
     } else {
-      console.log(`Empty url not allowed `);
-    }
+      if (url && url !== "") {
+        expand(url);
+      } else {
+        showAlert("error", "Please type your url")
+        console.log(`Empty url not allowed `);
+      }
+    } 
   });
 }

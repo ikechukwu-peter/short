@@ -1,42 +1,40 @@
 import request from "request";
-import ShortenModel from "../model/shorten.model";
 import path from "path";
 import { fork } from "child_process";
+import ShortenModel from "../model/shorten.model";
+import encryption from "../lib/encryption";
 
 //URLS class that handles all the url methods
 class URLS {
   private relative_filename: string = "../lib/random.ts";
   private fullPath: string = path.resolve(__dirname, this.relative_filename);
 
-  constructor() {}
+  constructor() { }
   async urlShortener(urlToShorten: any) {
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
 
       child.on("message", async (msg: any) => {
-        /**
-         * TODO: check for duplicate hash and create another
-         */
-        // let copy: any = await ShortenModel.findOne({ msg });
-
-        // if (copy) {
-        // }
-
         if (!urlToShorten.startsWith("http"))
           urlToShorten = "https:" + "//" + urlToShorten;
 
+        let urlHash: string = encryption(msg)
+        let hashCheck = await ShortenModel.findOne({ shorturl: urlHash })
+        if (hashCheck) {
+          return Promise.reject("That is already a Nip link.")
+        }
+
         let urlData = await ShortenModel.create({
-          shorturl: msg,
+          shorturl: urlHash,
           longurl: urlToShorten,
         });
 
-        console.log(urlData + "I came from here");
 
-        if (urlData.shorturl) {
+        if (urlData) {
           //send response
-          return resolve(urlData.shorturl);
+          return resolve(msg);
         } else {
-          return reject("Error creating a shortend url");
+          return reject("Error creating a shorten url");
         }
       });
 
@@ -51,16 +49,17 @@ class URLS {
     try {
       if (!urlToShorten.startsWith("http"))
         urlToShorten = "https:" + "//" + urlToShorten;
-      let data = await ShortenModel.findOne({ shorturl: custom });
+      let urlHash: string = encryption(custom)
+      let data = await ShortenModel.findOne({ shorturl: urlHash });
 
       if (data === null) {
-        let newUrl = await ShortenModel.create({
-          shorturl: custom,
+        await ShortenModel.create({
+          shorturl: urlHash,
           longurl: urlToShorten,
         });
-        return Promise.resolve(newUrl.shorturl);
+        return Promise.resolve(custom);
       } else {
-        return Promise.reject(`Custom url ${custom} not allowed.`);
+        return Promise.reject(`Custom already used.`);
       }
     } catch (err: any) {
       return Promise.reject(`Error occured`);
@@ -90,7 +89,8 @@ class URLS {
   }
   async urlForwarder(url: string) {
     try {
-      let urlData = await ShortenModel.findOne({ shorturl: url });
+      let urlHash: string = encryption(url)
+      let urlData = await ShortenModel.findOne({ shorturl: urlHash });
 
       if (urlData !== null) {
         urlData.accessed++;

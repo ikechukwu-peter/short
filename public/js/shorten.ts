@@ -1,9 +1,13 @@
 /* eslint-disable */
 import axios from "axios";
+import { showAlert } from './alert'
 let shortenBtn = <HTMLInputElement>document.getElementById("shorten-btn");
 let shortForm = document.getElementById("shorten");
-
+ 
 export const shorten = async (urlToShorten: string, custom: string = "") => {
+  //colors
+  let bgColor: string = "#016064"
+  let bgHoverColor: string = "48aaad";
   try {
     let route: string =
       custom !== ""
@@ -11,13 +15,10 @@ export const shorten = async (urlToShorten: string, custom: string = "") => {
         : `/shorten?urlToShorten=${urlToShorten}`;
 
     if (shortenBtn) {
-      //set button background to show disabled
-      // shortenBtn.setAttribute("id", "is-active");
-
       let spinner = `<i class="fa fa-spinner fa-spin"></i>`;
       shortenBtn.innerHTML = spinner;
-
       shortenBtn.disabled = true;
+      shortenBtn.style.backgroundColor = bgHoverColor;
     }
 
     const res = await axios({
@@ -26,7 +27,8 @@ export const shorten = async (urlToShorten: string, custom: string = "") => {
     });
     shortenBtn.innerHTML = "Shorten";
     shortenBtn.disabled = false;
-    console.log(res.data);
+    shortenBtn.style.backgroundColor = bgColor;
+ 
     if (shortForm) {
       console.log(res.data);
       let insertResponseToDom = `<div class="shorten-url">
@@ -70,8 +72,8 @@ export const shorten = async (urlToShorten: string, custom: string = "") => {
   } catch (err: any) {
     shortenBtn.innerHTML = "Shorten";
     shortenBtn.disabled = false;
+    shortenBtn.style.backgroundColor = bgColor;
     console.log(err.response.data.message);
-
-    // showAlert('error', err.response.data.message);
+    showAlert('error', err.response ? err.response.data.message : "Please check your internet connection");
   }
 };
