@@ -9,7 +9,7 @@ class URLS {
   private relative_filename: string = "../lib/random.ts";
   private fullPath: string = path.resolve(__dirname, this.relative_filename);
 
-  constructor() { }
+  constructor() {}
   async urlShortener(urlToShorten: any) {
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
@@ -18,10 +18,10 @@ class URLS {
         if (!urlToShorten.startsWith("http"))
           urlToShorten = "https:" + "//" + urlToShorten;
 
-        let urlHash: string = encryption(msg)
-        let hashCheck = await ShortenModel.findOne({ shorturl: urlHash })
+        let urlHash: string = encryption(msg);
+        let hashCheck = await ShortenModel.findOne({ shorturl: urlHash });
         if (hashCheck) {
-          return Promise.reject("That is already a Nip link.")
+          return Promise.reject("That is a Nip link.");
         }
 
         let urlData = await ShortenModel.create({
@@ -29,12 +29,11 @@ class URLS {
           longurl: urlToShorten,
         });
 
-
         if (urlData) {
           //send response
           return resolve(msg);
         } else {
-          return reject("Error creating a shorten url");
+          return reject("Error creating url");
         }
       });
 
@@ -49,7 +48,7 @@ class URLS {
     try {
       if (!urlToShorten.startsWith("http"))
         urlToShorten = "https:" + "//" + urlToShorten;
-      let urlHash: string = encryption(custom)
+      let urlHash: string = encryption(custom);
       let data = await ShortenModel.findOne({ shorturl: urlHash });
 
       if (data === null) {
@@ -89,7 +88,7 @@ class URLS {
   }
   async urlForwarder(url: string) {
     try {
-      let urlHash: string = encryption(url)
+      let urlHash: string = encryption(url);
       let urlData = await ShortenModel.findOne({ shorturl: urlHash });
 
       if (urlData !== null) {
