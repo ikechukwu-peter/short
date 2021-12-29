@@ -545,6 +545,9 @@ footer {
 
 /* Medium */
 @media screen and (max-width: 375px) {
+  .logo {
+    padding-left: 1rem;
+  }
   .nav {
     width: 60%;
   }

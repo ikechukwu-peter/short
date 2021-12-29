@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import path from "path";
 // @ts-ignore
 import rateLimit from "express-rate-limit";
 //@ts-ignore
@@ -6,7 +7,6 @@ import helmet from "helmet";
 //@ts-ignore
 import xssclean from "xss-clean";
 import compression from "compression";
-import path from "path";
 import route from "./routes/url.routes";
 
 const app: Application = express();
@@ -14,7 +14,7 @@ const app: Application = express();
 // view engine setup
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
-app.use(express.static("public"));
+app.use(express.static(process.cwd() + "/public"));
 
 //Body parser, reading data from req.body
 app.use(express.json({ limit: "10kb" }));
