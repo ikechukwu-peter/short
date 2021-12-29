@@ -10,11 +10,13 @@ import compression from "compression";
 import route from "./routes/url.routes";
 
 const app: Application = express();
+console.log(process.cwd() + "/public");
+console.log(path.join(process.cwd(), "public"));
 
 // view engine setup
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
-app.use(express.static(process.cwd() + "/public"));
+app.use(express.static(path.join(process.cwd(), "public")));
 
 //Body parser, reading data from req.body
 app.use(express.json({ limit: "10kb" }));
