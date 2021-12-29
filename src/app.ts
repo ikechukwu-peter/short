@@ -17,6 +17,7 @@ console.log(path.join(process.cwd(), "public"));
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
 app.use(express.static(path.join(process.cwd(), "public")));
+app.use(express.static(path.join(process.cwd(), "css")));
 
 //Body parser, reading data from req.body
 app.use(express.json({ limit: "10kb" }));

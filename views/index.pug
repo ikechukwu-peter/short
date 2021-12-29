@@ -6,8 +6,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
         link(rel='stylesheet', type='text/css', href='/css/normalize.css')
-        link(rel='stylesheet', type='text/css', href='./css/yo.css')
-        link(rel='stylesheet', type='text/css', href='/css/main.css')
+        link(rel='stylesheet', type='text/css', href='css/main.css')
         title=title
     body
         header(class="head-container")
@@ -28,15 +27,7 @@ html(lang="en")
                     input#user-link(type="text" placeholder=("Shorten your link") name=("user-link")) 
                     input#branding(type="text" placeholder=("custom branding") name=("branding")) 
                     button#shorten-btn(type="submit") Shorten
-                //-Dynamic content                           
-                //- div(class="shorten-url") 
-                //-     span(class="user-provided") 
-                //-         a#user-provided-link
-                //-     div(class="generated")
-                //-         a#generated-link()
-                //-         span(class="tooltip")                        
-                //-             button(class="shorten-copy-btn") Copy
-                //-                 span#myTooltip(class="tooltiptext shorttip") Copy to clipboard
+            
             div(class="outro-container")
                 h2(class="question") Did you know?
                 p(class="explainer") You can find the full form of a url before clicking? Use the expand option below.
@@ -44,15 +35,7 @@ html(lang="en")
                 form#expand(action="")
                     input#expand-input(type="text" placeholder=("Expand your link")) 
                     button#expand-btn(type="submit") Expand
-                //-Dynamic content
-                //- div(class="expand-url")
-                //-     span(class="user-provided")
-                //-         a#user-provided-url
-                //-     div(class="generated")
-                //-         a#expanded-link()
-                //-         span(class="tooltip")
-                //-             button(class="expand-copy-btn") Copy
-                //-                 span#myTooltip(class="tooltiptext expandtip") Copy to clipboard
+               
             div(class="service-about")
                 div#services(class="services")
                     h2 Services 
