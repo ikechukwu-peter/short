@@ -4,11 +4,10 @@
   "description": "A nodejs application to shorten and expand url",
   "main": "server.ts",
   "scripts": {
-    "start": "esbuild --minify --bundle  ./public/js --outfile=./public/js/bundle.js && tsc -p . && node dist/server.js",
+    "start": "node dist/server.js",
     "dev": "nodemon --exec npx ts-node src/server.ts",
     "watch:js": "esbuild --watch --bundle  ./public/js --outfile=./public/js/bundle.js",
-    "build": "tsc -p .",
-    "build:js": "esbuild --minify --bundle  ./public/js --outfile=./public/js/bundle.js"
+    "build": "esbuild --minify --bundle  ./public/js --outfile=./public/js/bundle.js && tsc -p ."
   },
   "repository": "https:github.com/ikechukwu-peter/nip.git",
   "author": "Ikechukwu Peter Chinedu",

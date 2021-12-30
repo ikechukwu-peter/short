@@ -16,7 +16,7 @@ console.log(path.join(process.cwd(), "public"));
 //setting static files
 app.use(express.static(path.join(process.cwd(), "public")));
 // view engine setup
-app.set("views", path.join(__dirname, "../views"));
+app.set("views", path.join(process.cwd(), "views"));
 app.set("view engine", "pug");
 
 //Body parser, reading data from req.body
