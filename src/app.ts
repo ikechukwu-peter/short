@@ -10,8 +10,6 @@ import compression from "compression";
 import route from "./routes/url.routes";
 
 const app: Application = express();
-console.log(process.cwd() + "/public");
-console.log(path.join(process.cwd(), "public"));
 
 //setting static files
 app.use(express.static("public"));
