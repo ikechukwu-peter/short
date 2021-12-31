@@ -14,7 +14,7 @@ const app: Application = express();
 //setting static files
 app.use(express.static("public"));
 // view engine setup
-app.set("views", "views");
+app.set("views", "./views");
 app.set("view engine", "pug");
 
 //Body parser, reading data from req.body
