@@ -84,16 +84,13 @@ class URLS {
       res.redirect(response);
     } catch (err: any) {
       console.log(err);
-      res.status(500).json({ status: "fail", message: err });
+      res.render("notFound", { title: "Nip || 404, Page Not Found." });
     }
   }
+  async doNotExist(req: Request, res: Response) {
+      res.render("notFound", { title: "Nip || 404, Page Not Found." });
+  }   
 
-  async urlDoNotExist(req: Request, res: Response) {
-    res.status(404).json({
-      status: "fail",
-      message: `Requested route ${req.originalUrl} does not exist.`,
-    });
-  }
 }
 
 const urlController = new URLS();

@@ -96,7 +96,7 @@ class URLS {
         urlData.save();
         return Promise.resolve(urlData.longurl);
       } else {
-        return Promise.reject("No url found");
+        return Promise.reject("No uRRRRRRRRRl found");
       }
     } catch (err: any) {
       console.log(err);

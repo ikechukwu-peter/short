@@ -568,3 +568,9 @@ footer {
     padding: 1.6rem 2rem;
   }
 }
+
+@media screen  and (max-width: 320px){
+  .nav {
+    width: 70%;
+}
+}

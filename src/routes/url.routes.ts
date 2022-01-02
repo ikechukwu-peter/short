@@ -7,6 +7,6 @@ route.get("/", urlController.index);
 route.get("/shorten", urlController.urlShortener);
 route.get("/expand", urlController.urlExpander);
 route.get("/:urlToForward", urlController.urlForwarder);
-route.get("*", urlController.urlDoNotExist);
+route.get("*", urlController.doNotExist);
 
 export default route;
