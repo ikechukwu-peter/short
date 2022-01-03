@@ -11,7 +11,6 @@ class URLS {
 
   constructor() {}
   async urlShortener(urlToShorten: any) {
-    console.log(this.relative_filename)
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
 

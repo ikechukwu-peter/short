@@ -52,6 +52,9 @@ a {
   top: 0;
   background: var(--theme);
   z-index: 9999999;
+  height: 5rem;
+  left: 0;
+  right: 0;
 }
 
 .logo {
