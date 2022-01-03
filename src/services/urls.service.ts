@@ -6,11 +6,12 @@ import encryption from "../lib/encryption";
 
 //URLS class that handles all the url methods
 class URLS {
-  private relative_filename: string = "../lib/random.ts";
+  private relative_filename: string = "../lib/random";
   private fullPath: string = path.resolve(__dirname, this.relative_filename);
 
   constructor() {}
   async urlShortener(urlToShorten: any) {
+    console.log(this.relative_filename)
     return new Promise((resolve, reject) => {
       let child = fork(this.fullPath);
 
